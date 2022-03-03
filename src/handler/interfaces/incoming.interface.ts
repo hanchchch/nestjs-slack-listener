@@ -43,6 +43,16 @@ export interface TeamJoinEvent {
   type: 'team_join';
   user: Member;
 }
+
+export interface MessageEvent {
+  type: 'message';
+  subtype?: string;
+  channel: string;
+  user: string;
+  text: string;
+  ts: string;
+}
+
 export interface IncomingSlackEvent<T = DefaultSlackEvent> {
   token: string;
   team_id: string;
