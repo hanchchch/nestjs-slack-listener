@@ -544,7 +544,7 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@nestjs/common@^8.1.2":
+"@nestjs/common@^8.4.0":
   version "8.4.0"
   resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-8.4.0.tgz#b8649836cfe74bc0700eb8a1c2a4d4d7997c66f8"
   integrity sha512-uvm1Ccw0qRka/Gd5Mo5A2MQo9ItwewPes1fE2SBboennPojoiJ4A3iKirtlPuxsL+HQ4oD5eO02OsDyLYL2z6w==
@@ -1814,7 +1814,7 @@ eslint-visitor-keys@^3.0.0, eslint-visitor-keys@^3.3.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-3.3.0.tgz#f6480fa6b1f30efe2d1968aa8ac745b862469826"
   integrity sha512-mQ+suqKJVyeuwGYHAdjMFqjCyfl8+Ldnxuyp3ldiMBFKkvytrXUZWaiPCEav8qDHKty44bD+qV1IP4T+w+xXRA==
 
-eslint@^8.2.0:
+eslint@^8.10.0:
   version "8.10.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.10.0.tgz#931be395eb60f900c01658b278e05b6dae47199d"
   integrity sha512-tcI1D9lfVec+R4LE1mNDnzoJ/f71Kl/9Cv4nG47jOueCMBrCCKYXr4AUVS7go6mWYGFD4+EoN6+eXSrEbRzXVw==
@@ -3633,10 +3633,10 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier@2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.4.1.tgz#671e11c89c14a4cfc876ce564106c4a6726c9f5c"
-  integrity sha512-9fbDAXSBcc6Bs1mZrDYb3XKzDLm4EXXL9sC1LqKP5rZkT6KRr/rf9amVUcODVXgguK/isJz0d0hP72WeaKWsvA==
+prettier@2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.5.1.tgz#fff75fa9d519c54cf0fce328c1017d94546bc56a"
+  integrity sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg==
 
 pretty-format@^27.0.0, pretty-format@^27.5.1:
   version "27.5.1"
@@ -4361,10 +4361,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@4.4.4:
-  version "4.4.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.4.4.tgz#2cd01a1a1f160704d3101fd5a58ff0f9fcb8030c"
-  integrity sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==
+typescript@4.6.2:
+  version "4.6.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.6.2.tgz#fe12d2727b708f4eef40f51598b3398baa9611d4"
+  integrity sha512-HM/hFigTBHZhLXshn9sN37H085+hQGeJHJ/X7LpBWLID/fbc2acUMfU+lGD98X81sKP+pFa9f0DZmCwB9GnbAg==
 
 unbox-primitive@^1.0.1:
   version "1.0.1"
