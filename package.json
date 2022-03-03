@@ -27,16 +27,25 @@
     "test:cov"
   ],
   "keywords": [
-    "nestjs"
+    "nestjs",
+    "slack",
+    "slack-bot",
+    "slack-listener",
+    "slack-handler",
+    "slack-event",
+    "slack-event-handler",
+    "slack-event-listener",
+    "slack-sdk",
+    "web-api"
   ],
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bzuker/nestjs-library-template"
+    "url": "https://github.com/hanchchch/nestjs-slack-listener"
   },
-  "bugs": "https://github.com/bzuker/nestjs-library-template",
+  "bugs": "https://github.com/hanchchch/nestjs-slack-listener",
   "peerDependencies": {
     "@nestjs/common": "^8.0.0",
     "rxjs": "^7.x"
