@@ -1,0 +1,89 @@
+{
+  "name": "nestjs-slack-listener",
+  "version": "1.0.1",
+  "description": "NestJS Slack listeners and handlers",
+  "author": "Chung Hwan Han <cndghks15@gmail.com>",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "main": "dist/index.js",
+  "files": [
+    "dist/**/*",
+    "*.md"
+  ],
+  "scripts": {
+    "start:dev": "tsc -w",
+    "build": "tsc",
+    "prepare": "npm run build",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint \"{src,apps,libs,test,__tests__}/**/*.ts\" --fix",
+    "lint:ci": "eslint \"{src,apps,libs,test,__tests__}/**/*.ts\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "precommit": [
+    "lint:ci",
+    "test:cov"
+  ],
+  "keywords": [
+    "nestjs"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bzuker/nestjs-library-template"
+  },
+  "bugs": "https://github.com/bzuker/nestjs-library-template",
+  "peerDependencies": {
+    "@nestjs/common": "^8.0.0",
+    "rxjs": "^7.x"
+  },
+  "dependencies": {
+    "@golevelup/nestjs-modules": "^0.4.3",
+    "@slack/web-api": "^6.7.0",
+    "rxjs": "^7.x"
+  },
+  "devDependencies": {
+    "@nestjs/common": "^8.1.2",
+    "@nestjs/core": "^8.1.2",
+    "@nestjs/platform-express": "^8.1.2",
+    "@nestjs/testing": "^8.1.2",
+    "@types/express": "^4.17.13",
+    "@types/jest": "27.0.2",
+    "@types/node": "16.11.6",
+    "@types/supertest": "2.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.3.0",
+    "@typescript-eslint/parser": "^5.3.0",
+    "eslint": "^8.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "27.3.1",
+    "pre-commit": "^1.2.2",
+    "prettier": "2.4.1",
+    "reflect-metadata": "^0.1.13",
+    "supertest": "6.1.6",
+    "ts-jest": "27.0.7",
+    "ts-node": "10.4.0",
+    "tsc-watch": "4.5.0",
+    "tsconfig-paths": "3.11.0",
+    "typescript": "4.4.4"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
+}
