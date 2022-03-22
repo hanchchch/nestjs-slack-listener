@@ -579,9 +579,9 @@
     tslib "2.3.1"
 
 "@nestjs/testing@^8.1.2":
-  version "8.4.0"
-  resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-8.4.0.tgz#c727fc427d753f106d1c9b11383858a24518170d"
-  integrity sha512-Gk9OW4RpiIGDOROHS7O271uJEpIddQP94zlkPOVOu3HPUxntfKbmDU4cDaCqC0PQ9Jtj71C0H1j9RS8ituYLAw==
+  version "8.4.2"
+  resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-8.4.2.tgz#ed392a206b90f563f85c8f03534de93b8710afe3"
+  integrity sha512-vb8sJTjdakqa9k5tMdcKJf8lG3TT7ekwaVbQ4FXGBjjYrriILYioQv23kkKrgOkT1HErUPdYAgeECw5qE8MIzg==
   dependencies:
     optional "0.1.4"
     tslib "2.3.1"
