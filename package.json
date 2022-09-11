@@ -51,7 +51,7 @@
     "rxjs": "^7.x"
   },
   "dependencies": {
-    "@golevelup/nestjs-modules": "^0.5.0",
+    "@golevelup/nestjs-modules": "^0.6.0",
     "@slack/web-api": "^6.7.0",
     "rxjs": "^7.x"
   },
