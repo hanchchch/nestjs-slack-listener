@@ -320,10 +320,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@golevelup/nestjs-modules@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@golevelup/nestjs-modules/-/nestjs-modules-0.5.0.tgz#9763769043e18a184da1ea885c02fb490d1ec3c9"
-  integrity sha512-6ZGjPtm0KwJ7Txa3Z14IzILi7pfvGrLZHv/q9/4tt7T5ngcCe71wJp32TG0/b3UkJX3/LEm4AtYjcfwiIrfSlg==
+"@golevelup/nestjs-modules@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@golevelup/nestjs-modules/-/nestjs-modules-0.6.0.tgz#bba08f06e7eb67d14fed2852984812e646c7cfed"
+  integrity sha512-h48PCCQUsFMEI5lbha3mRHKyFacFlWD8y5FL4asr23A96SKkMVUHsF3FQ3jKTGYNcPTdSnj+wNMTc5rxJYqAxQ==
   dependencies:
     lodash "^4.17.21"
 
