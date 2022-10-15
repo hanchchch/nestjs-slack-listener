@@ -137,3 +137,44 @@ export class OnBoardingController {
   }
 }
 ```
+
+## Slack Client
+
+Use `InjectSlackClient` to use the slack web api client.
+
+```ts
+@Injectable()
+export class OnBoardingService {
+  constructor(
+    private readonly userRepository: UserRepository,
+    @InjectSlackClient()
+    private readonly slack: SlackClient,
+  ) {}
+  ...
+}
+```
+
+The injected `SlackClient` is identical to the official [Slack Web API Client](https://www.npmjs.com/package/@slack/web-api)
+
+```ts
+await this.slack.chat.postMessage({
+  channel: user.id,
+  text: 'Hi there! 👋🏻',
+  blocks: [
+    {
+      type: 'header',
+      text: {
+        type: 'plain_text',
+        text: 'Hi there! 👋🏻',
+      },
+    },
+    {
+      type: 'section',
+      text: {
+        type: 'mrkdwn',
+        text: `Hello! Nice to meet you, ${user.name}! I'm *hanch*, a slack bot that helps you with onboarding process.`,
+      },
+    },
+  ],
+});
+```

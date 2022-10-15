@@ -1,73 +1,84 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Example app for nestjs-slack-listener
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Scenario
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This app is a simple example of how to use `nestjs-slack-listener` to build a slack app. It sends a welcome message with instructions to a new user. The user can press the 'Done!' button to complete the onboarding process.
 
-## Description
+## Subscribe Slack Events and Interactivity
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[The controller](/example/nestjs-slack-example/src/onboarding/on-boarding.controller.ts) is decorated with `@SlackEventListener()` and `@SlackInteractivityListener` to subscribe the events and interactivity.
 
-## Installation
-
-```bash
-$ npm install
+```ts
+@Controller('on-boarding')
+@SlackEventListener()
+@SlackInteractivityListener()
+export class OnBoardingController {
+  ...
+}
 ```
 
-## Running the app
+When the user joins to the team, the method decorated with `@SlackEventHandler('team_join')` is called.
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```ts
+@SlackEventHandler('team_join')
+async onTeamJoin({
+  event: { user: member },
+}: IncomingSlackEvent<TeamJoinEvent>) {
+  return this.onboardingService.startOnBoarding({ member });
+}
 ```
 
-## Test
+When the user presses the 'Done!' button, the method decorated with `@SlackInteractivityHandler(ACTION_ID.COMPLETE_QUEST)` is called.
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```ts
+@SlackInteractivityHandler(ACTION_ID.COMPLETE_QUEST)
+async completeQuest({
+  user: { id: userSlackId },
+  actions: [{ value: questUserId }],
+}: IncomingSlackInteractivity) {
+  if (userSlackId !== questUserId) {
+    throw new ForbiddenException();
+  }
+  return this.onboardingService.completeQuest({
+    userSlackId,
+  });
+}
 ```
 
-## Support
+## Send a message to channel with the Slack Client
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+The `SlackClient` is injected to [the service](/example/nestjs-slack-example/src/onboarding/on-boarding.service.ts) class, enabling it to send a message to the channel.
 
-## Stay in touch
+```ts
+@Injectable()
+export class OnBoardingService {
+  constructor(
+    private readonly userRepository: UserRepository,
+    @InjectSlackClient()
+    private readonly slack: SlackClient,
+  ) {}
+  ...
+}
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Include a action block in the message so the user can call the controller method decorated with `@SlackInteractivityHandler(ACTION_ID.COMPLETE_QUEST)`.
 
-## License
+```ts
+        {
+          type: 'actions',
+          elements: [
+            {
+              type: 'button',
+              value: `${user.id}`,
+              action_id: ACTION_ID.COMPLETE_QUEST,
+              text: { type: 'plain_text', text: ':white_check_mark: Done!' },
+            },
+          ],
+        },
+```
 
-Nest is [MIT licensed](LICENSE).
+The `SlackClient` is identical to the official [Slack Web API Client](https://www.npmjs.com/package/@slack/web-api)
+
+```ts
+await this.slack.chat.postMessage(this.buildIntroBlock(user));
+```
