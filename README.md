@@ -14,6 +14,14 @@
   </a>
 </div>
 
+<p align="center">🥰 Any kinds of contributions are welcome! 🥰</p>
+
+# Installation
+
+```
+yarn add nestjs-slack-listener
+```
+
 # Usage
 
 ## Settings
@@ -24,7 +32,7 @@ Import the module at your app module.
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    SlackHandlerModule.forRootAsync({
+    SlackModule.forRootAsync({
       useFactory: async (config: ConfigService<EnvVars>) => ({
         botToken: config.get('SLACK_BOT_TOKEN'),
       }),
