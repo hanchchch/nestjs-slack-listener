@@ -28,6 +28,8 @@ Please refer to the [example](/example/nestjs-slack-example/) for more details.
 
 ## Settings
 
+### Import `SlackModule`
+
 Import the module at your app module.
 
 ```typescript
@@ -46,6 +48,17 @@ Import the module at your app module.
 })
 export class AppModule {}
 ```
+
+### Event and Interactivity Subscription
+
+You need to set event and interactivity subscriptions URL of your slack app so that the app can receive events and interactivity from slack.
+
+- Event subscription
+  - https://api.slack.com/apps/your-app-id/event-subscriptions
+  - `http://<hostname>/slack/events`
+- Interactivity subscription
+  - https://api.slack.com/apps/your-app-id/interactive-messages
+  - `http://<hostname>/slack/interactivity`
 
 ## Decorators
 
