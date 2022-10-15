@@ -24,6 +24,8 @@ yarn add nestjs-slack-listener
 
 # Usage
 
+Please refer to the [example](/example/nestjs-slack-example/) for more details.
+
 ## Settings
 
 Import the module at your app module.
