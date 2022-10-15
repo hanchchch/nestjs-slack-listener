@@ -53,6 +53,36 @@ describe('Slack Module Initialization', () => {
       await app.init();
       await app.close();
     });
+    it('should usable globally', async () => {
+      @Injectable()
+      class TestLocalService {
+        constructor(@InjectSlackClient() slack: SlackClient) {
+          expect(slack).toBeDefined();
+        }
+        getBotToken() {
+          return 'test';
+        }
+      }
+      @Module({
+        imports: [],
+        providers: [TestLocalService],
+      })
+      class TestLocalModule {}
+      @Module({
+        imports: [
+          SlackModule.forRoot({
+            botToken: 'test',
+          }),
+          TestLocalModule,
+        ],
+      })
+      class TestModule {}
+
+      const app = await NestFactory.create(TestModule);
+
+      await app.init();
+      await app.close();
+    });
   });
   describe('forRootAsync', () => {
     it('should compile only with botToken option', async () => {
@@ -99,6 +129,36 @@ describe('Slack Module Initialization', () => {
           }),
         ],
         providers: [TestService],
+      })
+      class TestModule {}
+
+      const app = await NestFactory.create(TestModule);
+
+      await app.init();
+      await app.close();
+    });
+    it('should usable globally', async () => {
+      @Injectable()
+      class TestLocalService {
+        constructor(@InjectSlackClient() slack: SlackClient) {
+          expect(slack).toBeDefined();
+        }
+        getBotToken() {
+          return 'test';
+        }
+      }
+      @Module({
+        imports: [],
+        providers: [TestLocalService],
+      })
+      class TestLocalModule {}
+      @Module({
+        imports: [
+          SlackModule.forRootAsync({
+            useFactory: () => ({ botToken: 'test' }),
+          }),
+          TestLocalModule,
+        ],
       })
       class TestModule {}
 
