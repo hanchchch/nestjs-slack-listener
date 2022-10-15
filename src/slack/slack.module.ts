@@ -1,19 +1,21 @@
 import { DynamicModule, Module, OnModuleInit, Provider } from '@nestjs/common';
 import { MetadataScanner } from '@nestjs/core';
-import { SLACK_CONFIG_OPTIONS } from './constant/symbol';
+import { SLACK_CLIENT, SLACK_CONFIG_OPTIONS } from './constant/symbol';
 import { SlackHandlerExplorer } from './handler.explorer';
 import { SlackModuleAsyncOptions, SlackModuleOptions } from './interfaces';
+import { SlackClientService } from './slack-client.service';
 import { SlackEventsController } from './slack-handler.controller';
 import { SlackHandler } from './slack-handler.service';
 
 @Module({
   providers: [MetadataScanner, SlackHandlerExplorer],
 })
-export class SlackHandlerModule implements OnModuleInit {
+export class SlackModule implements OnModuleInit {
   static forRoot(options: SlackModuleOptions): DynamicModule {
     const slackServiceProvider = this.createSlackServiceProvider();
+    const slackClientProvider = this.createSlackClientProvider();
     return {
-      module: SlackHandlerModule,
+      module: SlackModule,
       controllers: [SlackEventsController],
       providers: [
         {
@@ -21,20 +23,22 @@ export class SlackHandlerModule implements OnModuleInit {
           useValue: options,
         },
         slackServiceProvider,
+        slackClientProvider,
       ],
-      exports: [SlackHandler],
+      exports: [SlackHandler, SLACK_CLIENT],
     };
   }
 
   static forRootAsync(options: SlackModuleAsyncOptions): DynamicModule {
     const slackServiceProvider = this.createSlackServiceProvider();
+    const slackClientProvider = this.createSlackClientProvider();
     const asyncProviders = this.createAsyncProviders(options);
     return {
-      module: SlackHandlerModule,
+      module: SlackModule,
       controllers: [SlackEventsController],
       imports: options.imports || [],
-      providers: [...asyncProviders, slackServiceProvider],
-      exports: [SlackHandler],
+      providers: [...asyncProviders, slackServiceProvider, slackClientProvider],
+      exports: [SlackHandler, SLACK_CLIENT],
     };
   }
 
@@ -42,6 +46,15 @@ export class SlackHandlerModule implements OnModuleInit {
     return {
       provide: SlackHandler,
       useFactory: () => new SlackHandler(),
+      inject: [SLACK_CONFIG_OPTIONS],
+    };
+  }
+
+  private static createSlackClientProvider(): Provider {
+    return {
+      provide: SLACK_CLIENT,
+      useFactory: (options: SlackModuleOptions) =>
+        new SlackClientService(options).client,
       inject: [SLACK_CONFIG_OPTIONS],
     };
   }
