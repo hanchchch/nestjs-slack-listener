@@ -1,4 +1,10 @@
-import { DynamicModule, Module, OnModuleInit, Provider } from '@nestjs/common';
+import {
+  DynamicModule,
+  Global,
+  Module,
+  OnModuleInit,
+  Provider,
+} from '@nestjs/common';
 import { MetadataScanner } from '@nestjs/core';
 import { SLACK_CLIENT, SLACK_CONFIG_OPTIONS } from './constant/symbol';
 import { SlackHandlerExplorer } from './handler.explorer';
@@ -7,6 +13,7 @@ import { SlackClientService } from './slack-client.service';
 import { SlackEventsController } from './slack-handler.controller';
 import { SlackHandler } from './slack-handler.service';
 
+@Global()
 @Module({
   providers: [MetadataScanner, SlackHandlerExplorer],
 })
