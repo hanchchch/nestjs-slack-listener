@@ -16,13 +16,13 @@ export class OnBoardingService {
   buildIntroBlock(user: User) {
     return {
       channel: user.id,
-      text: '반가워요! 👋🏻',
+      text: 'Hi there! 👋🏻',
       blocks: [
         {
           type: 'header',
           text: {
             type: 'plain_text',
-            text: '반가워요! 👋🏻',
+            text: 'Hi there! 👋🏻',
           },
         },
         {
