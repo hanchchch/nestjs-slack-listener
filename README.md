@@ -16,6 +16,19 @@
 
 <p align="center">🥰 Any kinds of contributions are welcome! 🥰</p>
 
+---
+
+# Features
+
+- Class decorator `@SlackEventListener`
+  - Decorate the class to use it as a Slack event listener, just like decorating HTTP listeners with `@Controller`.
+- Method decorator `@SlackEventHandler`
+  - Decorate the method to use it as a Slack event handler, just like decorating HTTP handlers with `@Get`, `@Post`, etc.
+  - You can filter events by event type, or your custom filtering function.
+- Slack Web API Client
+  - Inject the Slack Web API client to your service class with `@InjectSlackClient` decorator.
+  - You can use the client to send messages to Slack, or whatever you want to do.
+
 # Installation
 
 ```
