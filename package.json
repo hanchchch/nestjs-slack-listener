@@ -1,6 +1,6 @@
 {
   "name": "nestjs-slack-listener",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "NestJS Slack listeners and handlers",
   "author": "Chung Hwan Han <cndghks15@gmail.com>",
   "license": "MIT",
@@ -47,7 +47,7 @@
   },
   "bugs": "https://github.com/hanchchch/nestjs-slack-listener",
   "peerDependencies": {
-    "@nestjs/common": "^8.0.0",
+    "@nestjs/common": "^9.3.9",
     "rxjs": "^7.x"
   },
   "dependencies": {
