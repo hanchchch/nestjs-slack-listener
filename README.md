@@ -16,6 +16,19 @@
 
 <p align="center">🥰 Any kinds of contributions are welcome! 🥰</p>
 
+---
+
+# Features
+
+- Class decorator `@SlackEventListener`
+  - Decorate the class to use it as a Slack event listener, just like decorating HTTP listeners with `@Controller`.
+- Method decorator `@SlackEventHandler`
+  - Decorate the method to use it as a Slack event handler, just like decorating HTTP handlers with `@Get`, `@Post`, etc.
+  - You can filter events by event type, or your custom filtering function.
+- Slack Web API Client
+  - Inject the Slack Web API client to your service class with `@InjectSlackClient` decorator.
+  - You can use the client to send messages to Slack, or whatever you want to do.
+
 # Installation
 
 ```
@@ -27,6 +40,8 @@ yarn add nestjs-slack-listener
 Please refer to the [example](/example/nestjs-slack-example/) for more details.
 
 ## Settings
+
+### Import `SlackModule`
 
 Import the module at your app module.
 
@@ -46,6 +61,17 @@ Import the module at your app module.
 })
 export class AppModule {}
 ```
+
+### Event and Interactivity Subscription
+
+You need to set event and interactivity subscriptions URL of your slack app so that the app can receive events and interactivity from slack.
+
+- Event subscription
+  - https://api.slack.com/apps/your-app-id/event-subscriptions
+  - `http://<hostname>/slack/events`
+- Interactivity subscription
+  - https://api.slack.com/apps/your-app-id/interactive-messages
+  - `http://<hostname>/slack/interactivity`
 
 ## Decorators
 
