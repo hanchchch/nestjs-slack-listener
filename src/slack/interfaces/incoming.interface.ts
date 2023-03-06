@@ -45,6 +45,7 @@ export interface TeamJoinEvent {
 }
 
 export interface MessageEvent {
+  bot_id?: string;
   type: 'message';
   subtype?: string;
   channel: string;

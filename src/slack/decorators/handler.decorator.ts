@@ -4,6 +4,7 @@ import {
   SLACK_INTERACTIVITY_HANDLER,
 } from '../constant/symbol';
 import {
+  DefaultSlackEvent,
   IncomingSlackEvent,
   IncomingSlackInteractivity,
   SlackEventHandlerConfig,
@@ -33,11 +34,11 @@ type SlackInteractivityHandlerSubMethodConfig = Omit<
 > &
   DecoratorParams;
 
-export function SlackEventHandler(
+export function SlackEventHandler<Event = DefaultSlackEvent>(
   params:
     | {
         eventType?: SlackEventType;
-        filter?: (event: IncomingSlackEvent) => boolean;
+        filter?: (event: IncomingSlackEvent<Event>) => boolean;
       }
     | SlackEventType,
 ) {
