@@ -1,19 +1,7 @@
-import { View, KnownBlock, PlainTextElement } from '@slack/web-api';
+import { View, KnownBlock } from '@slack/web-api';
 import { Member } from '@slack/web-api/dist/response/UsersListResponse';
+import { KnownAction } from '../types/action';
 import { SlackEventType } from '../types/event';
-
-export type KnownAction = {
-  type: string;
-  action_id: string;
-  block_id: string;
-  text: PlainTextElement[];
-  value: string;
-  style: string;
-  action_ts: string;
-  selected_option?: any;
-  selected_user?: string;
-  initial_option?: any;
-};
 
 export interface IncomingSlackCommand {
   token: string;
