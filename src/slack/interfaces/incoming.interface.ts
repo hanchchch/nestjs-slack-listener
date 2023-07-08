@@ -1,4 +1,6 @@
+import { View, KnownBlock } from '@slack/web-api';
 import { Member } from '@slack/web-api/dist/response/UsersListResponse';
+import { KnownAction } from '../types/action';
 import { SlackEventType } from '../types/event';
 
 export interface IncomingSlackCommand {
@@ -108,23 +110,11 @@ export interface IncomingSlackInteractivity {
       image_64: string;
     };
     bot_id: string;
-    blocks: unknown[];
+    blocks: KnownBlock[];
     edited: { user: string; ts: string };
   };
   state: { values: Record<string, any> };
   response_url: string;
-  actions: [
-    {
-      action_id: string;
-      block_id: string;
-      text: unknown[];
-      value: string;
-      style: string;
-      type: string;
-      action_ts: string;
-      selected_option?: any;
-      selected_user?: string;
-      initial_option?: any;
-    },
-  ];
+  actions?: KnownAction[];
+  view?: View;
 }
