@@ -57,9 +57,13 @@ export class SlackHandler {
 
     if (actionId) {
       if (
+        payload.actions &&
         payload.actions.filter((action) => action.action_id == actionId)
           .length == 0
       ) {
+        return;
+      }
+      if (payload.view && payload.view.callback_id != actionId) {
         return;
       }
     }
