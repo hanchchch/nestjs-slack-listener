@@ -87,11 +87,17 @@ export class SlackHandler {
   }
 
   async handleInteractivity(payload: IncomingSlackInteractivity) {
-    return Promise.all(
+    const response = await Promise.all(
       this._interactivityHandlers.map(
         async (handlerConfig) =>
           await this.handleSingleInteractivity(payload, handlerConfig),
       ),
     );
+
+    const filtered = response.filter((elements) => {
+      return elements != null && elements !== undefined && elements !== '';
+    });
+
+    return filtered.length == 1 ? filtered[0] : filtered;
   }
 }
